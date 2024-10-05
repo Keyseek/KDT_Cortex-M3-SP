@@ -117,10 +117,10 @@ Disassembly of section .debug_info:
   34:	78657472 	stmdavc	r5!, {r1, r4, r5, r6, sl, ip, sp, lr}^
   38:	2d334d2d 	ldccs	13, cr4, [r3, #-180]!	; 0xffffff4c
   3c:	305c5053 	subscc	r5, ip, r3, asr r0
-  40:	2e313032 	mrccs	0, 1, r3, cr1, cr2, {1}
+  40:	2e313033 	mrccs	0, 1, r3, cr1, cr3, {1}
   44:	5f4d5341 	svcpl	0x004d5341
-  48:	5f44454c 	svcpl	0x0044454c
-  4c:	4c5f4e4f 	mrrcmi	14, 4, r4, pc, cr15	; <UNPREDICTABLE>
+  48:	5f544942 	svcpl	0x00544942
+  4c:	4c5f504f 	mrrcmi	0, 4, r5, pc, cr15	; <UNPREDICTABLE>
   50:	47004241 	strmi	r4, [r0, -r1, asr #4]
   54:	4120554e 	teqmi	r0, lr, asr #10
   58:	2e322053 	mrccs	0, 1, r2, cr2, cr3, {2}
