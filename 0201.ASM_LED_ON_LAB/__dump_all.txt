@@ -1,0 +1,169 @@
+
+.\rom_0x08000000.elf:     file format elf32-littlearm
+.\rom_0x08000000.elf
+architecture: arm, flags 0x00000112:
+EXEC_P, HAS_SYMS, D_PAGED
+start address 0x08000000
+
+Program Header:
+    LOAD off    0x00008000 vaddr 0x08000000 paddr 0x08000000 align 2**15
+         filesz 0x00000018 memsz 0x00000018 flags r-x
+private flags = 5000202: [Version5 EABI] [soft-float ABI] [has entry point]
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         00000018  08000000  08000000  00008000  2**2
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .ARM.attributes 00000021  00000000  00000000  00008018  2**0
+                  CONTENTS, READONLY
+  2 .debug_line   0000003d  00000000  00000000  00008039  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  3 .debug_info   00000064  00000000  00000000  00008076  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  4 .debug_abbrev 00000014  00000000  00000000  000080da  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  5 .debug_aranges 00000020  00000000  00000000  000080f0  2**3
+                  CONTENTS, READONLY, DEBUGGING
+SYMBOL TABLE:
+08000000 l    d  .text	00000000 .text
+00000000 l    d  .ARM.attributes	00000000 .ARM.attributes
+00000000 l    d  .debug_line	00000000 .debug_line
+00000000 l    d  .debug_info	00000000 .debug_info
+00000000 l    d  .debug_abbrev	00000000 .debug_abbrev
+00000000 l    d  .debug_aranges	00000000 .debug_aranges
+00000000 l    df *ABS*	00000000 crt0.o
+40010c04 l       *ABS*	00000000 GPIOB_CRH
+40010c0c l       *ABS*	00000000 GPIOB_ODR
+40021018 l       *ABS*	00000000 APB2ENR
+00000000 l    df *ABS*	00000000 
+20000000 g       .text	00000000 __RW_BASE__
+20000000 g       .text	00000000 __RW_LIMIT__
+08000008 g     F .text	00000000 __start
+00000000 g       *ABS*	00000000 __RW_SIZE__
+08000018 g       *ABS*	00000000 __RW_LOAD_ADDR__
+08000000 g       .text	00000000 __RO_BASE__
+20000000 g       .text	00000000 __ZI_LIMIT__
+08000018 g       .text	00000000 __RO_LIMIT__
+00000000 g       *ABS*	00000000 __ZI_SIZE__
+20000000 g       .text	00000000 __ZI_BASE__
+
+
+
+Disassembly of section .text:
+
+08000000 <__RO_BASE__>:
+ 8000000:	20005000 	andcs	r5, r0, r0
+ 8000004:	08000009 	stmdaeq	r0, {r0, r3}
+
+08000008 <__start>:
+	.equ GPIOB_ODR,	0x40010C0C
+	.equ APB2ENR,  	0x40021018
+
+	@ 이부분은 수정하지 말 것 @
+
+	LDR   r0, =APB2ENR
+ 8000008:	4801      	ldr	r0, [pc, #4]	; (8000010 <__start+0x8>)
+	LDR   r1, =0x8
+ 800000a:	4902      	ldr	r1, [pc, #8]	; (8000014 <__start+0xc>)
+	STR   r1, [r0]
+ 800000c:	6001      	str	r1, [r0, #0]
+
+
+
+
+
+	b		.
+ 800000e:	e7fe      	b.n	800000e <__start+0x6>
+	.equ GPIOB_ODR,	0x40010C0C
+	.equ APB2ENR,  	0x40021018
+
+	@ 이부분은 수정하지 말 것 @
+
+	LDR   r0, =APB2ENR
+ 8000010:	40021018 	andmi	r1, r2, r8, lsl r0
+	LDR   r1, =0x8
+ 8000014:	00000008 	andeq	r0, r0, r8
+
+Disassembly of section .ARM.attributes:
+
+00000000 <.ARM.attributes>:
+   0:	00002041 	andeq	r2, r0, r1, asr #32
+   4:	61656100 	cmnvs	r5, r0, lsl #2
+   8:	01006962 	tsteq	r0, r2, ror #18
+   c:	00000016 	andeq	r0, r0, r6, lsl r0
+  10:	726f4305 	rsbvc	r4, pc, #335544320	; 0x14000000
+  14:	2d786574 	cfldr64cs	mvdx6, [r8, #-464]!	; 0xfffffe30
+  18:	0600334d 	streq	r3, [r0], -sp, asr #6
+  1c:	094d070a 	stmdbeq	sp, {r1, r3, r8, r9, sl}^
+  20:	Address 0x00000020 is out of bounds.
+
+
+Disassembly of section .debug_line:
+
+00000000 <.debug_line>:
+   0:	00000039 	andeq	r0, r0, r9, lsr r0
+   4:	001d0002 	andseq	r0, sp, r2
+   8:	01020000 	mrseq	r0, (UNDEF: 2)
+   c:	000d0efb 	strdeq	r0, [sp], -fp
+  10:	01010101 	tsteq	r1, r1, lsl #2
+  14:	01000000 	mrseq	r0, (UNDEF: 0)
+  18:	00010000 	andeq	r0, r1, r0
+  1c:	30747263 	rsbscc	r7, r4, r3, ror #4
+  20:	0000732e 	andeq	r7, r0, lr, lsr #6
+  24:	00000000 	andeq	r0, r0, r0
+  28:	00080205 	andeq	r0, r8, r5, lsl #4
+  2c:	12030800 	andne	r0, r3, #0, 16
+  30:	28212101 	stmdacs	r1!, {r0, r8, sp}
+  34:	2f207603 	svccs	0x00207603
+  38:	01000202 	tsteq	r0, r2, lsl #4
+  3c:	Address 0x0000003c is out of bounds.
+
+
+Disassembly of section .debug_info:
+
+00000000 <.debug_info>:
+   0:	00000060 	andeq	r0, r0, r0, rrx
+   4:	00000002 	andeq	r0, r0, r2
+   8:	01040000 	mrseq	r0, (UNDEF: 4)
+   c:	00000000 	andeq	r0, r0, r0
+  10:	08000000 	stmdaeq	r0, {}	; <UNPREDICTABLE>
+  14:	08000018 	stmdaeq	r0, {r3, r4}
+  18:	30747263 	rsbscc	r7, r4, r3, ror #4
+  1c:	4400732e 	strmi	r7, [r0], #-814	; 0xfffffcd2
+  20:	f7be5c3a 			; <UNDEFINED> instruction: 0xf7be5c3a
+  24:	675cabb9 			; <UNDEFINED> instruction: 0x675cabb9
+  28:	75687469 	strbvc	r7, [r8, #-1129]!	; 0xfffffb97
+  2c:	444b5c62 	strbmi	r5, [fp], #-3170	; 0xfffff39e
+  30:	6f435f54 	svcvs	0x00435f54
+  34:	78657472 	stmdavc	r5!, {r1, r4, r5, r6, sl, ip, sp, lr}^
+  38:	2d334d2d 	ldccs	13, cr4, [r3, #-180]!	; 0xffffff4c
+  3c:	305c5053 	subscc	r5, ip, r3, asr r0
+  40:	2e313032 	mrccs	0, 1, r3, cr1, cr2, {1}
+  44:	5f4d5341 	svcpl	0x004d5341
+  48:	5f44454c 	svcpl	0x0044454c
+  4c:	4c5f4e4f 	mrrcmi	14, 4, r4, pc, cr15	; <UNPREDICTABLE>
+  50:	47004241 	strmi	r4, [r0, -r1, asr #4]
+  54:	4120554e 	teqmi	r0, lr, asr #10
+  58:	2e322053 	mrccs	0, 1, r2, cr2, cr3, {2}
+  5c:	352e3332 	strcc	r3, [lr, #-818]!	; 0xfffffcce
+  60:	80010032 	andhi	r0, r1, r2, lsr r0
+
+Disassembly of section .debug_abbrev:
+
+00000000 <.debug_abbrev>:
+   0:	10001101 	andne	r1, r0, r1, lsl #2
+   4:	12011106 	andne	r1, r1, #-2147483647	; 0x80000001
+   8:	1b080301 	blne	200c14 <__RW_SIZE__+0x200c14>
+   c:	13082508 	movwne	r2, #34056	; 0x8508
+  10:	00000005 	andeq	r0, r0, r5
+
+Disassembly of section .debug_aranges:
+
+00000000 <.debug_aranges>:
+   0:	0000001c 	andeq	r0, r0, ip, lsl r0
+   4:	00000002 	andeq	r0, r0, r2
+   8:	00040000 	andeq	r0, r4, r0
+   c:	00000000 	andeq	r0, r0, r0
+  10:	08000000 	stmdaeq	r0, {}	; <UNPREDICTABLE>
+  14:	00000018 	andeq	r0, r0, r8, lsl r0
+	...
